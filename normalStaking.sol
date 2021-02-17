@@ -611,10 +611,12 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
                
                 uint rewardMul = stk.reward.mul(ethManti); 
                 uint rewardPer = rewardMul.div(YEAR_DURATION);
-                uint rewardPerSec = rewardPer.div(ethManti);
-                uint rewardGenerated = rewardPerSec.mul(stk.stakeStarted);
-                uint remainingReward = rewardGenerated.sub(stk.withdrawn);
+                uint decade =  (block.timestamp).sub(stk.stakeStarted);
                 
+                uint rewardPerSec = rewardPer.mul(decade);
+                uint rewardGenerated = rewardPerSec.div(ethManti);
+                uint remainingReward = rewardGenerated.sub(stk.withdrawn);
+                        
                 _unstake(remainingReward);
             }
             else if( block.timestamp >= stk.stakeEnded){
@@ -675,8 +677,8 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         uint rewardMul = stk.reward.mul(ethManti); 
         uint rewardPer = rewardMul.div(YEAR_DURATION);
         uint decade =  (block.timestamp).sub(stk.stakeStarted);
-        uint reward =  decade; 
-        uint rewardPerSec = rewardPer.mul(reward);
+        
+        uint rewardPerSec = rewardPer.mul(decade);
         uint rewardGenerated = rewardPerSec.div(ethManti);
         uint remainingReward = rewardGenerated.sub(stk.withdrawn);
         
