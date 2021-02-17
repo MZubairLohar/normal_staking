@@ -413,9 +413,9 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     // ***************************************************      
     address payable owner;
     address payable BuyBurn;
+    address payable treasury;
     
     IERC20 public rewardsToken;
-    uint256 constant internal oneDay  = 86400 ;
     uint256 minStakeAmount = 1 * 1e20 ;
     uint256 public totalStake = 1; 
     //     ************ percentages ***********
@@ -430,7 +430,6 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     uint256 internal ethManti = 1e18;
     
     uint256 contractBalance;
-    uint256 lastRewardUpdate;
     Pool[] public poolArray;
     address[] rights;
     uint256[] poolCheckPonts;
@@ -452,14 +451,17 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     constructor( 
             address _stakingToken,
             address _rewardsToken,
-            address payable _rewardsDistributor
+            address payable _rewardsDistributor,
+            address payable _buyAndBurn,
+            address payable _treasury
             ) public
              StakingTokenWrapper(_stakingToken)
             RewardsDistributionRecipient(_rewardsDistributor)
             {
              rewardsToken = IERC20(_rewardsToken);
              owner = _rewardsDistributor;
-             BuyBurn = _rewardsDistributor;
+             BuyBurn = _buyAndBurn;
+             treasury = _treasury;
     }
             
 // ********************************************    
@@ -522,23 +524,16 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
 
   
     
-    function newPoolAdded(uint256 _newPool) internal{
-        lastRewardUpdate = lastRewardUpdate.add(_newPool);
-    }
+    
     
     function createPool(uint256 _amount) public  {
         Pool memory newPool = Pool( poolId , block.timestamp , _amount);
         poolArray.push(newPool);
         poolId = poolId.add(1);
         poolCheckPonts.push(newPool.checkPoint);
-      //  distributPool(poolId);
+     
     }
-    // function distributPool(uint _poolId) internal{
-    //     uint payToPayee;
-    //     Pool storage disReward = poolArray[_poolId];
-    //     payToPayee = payToPayee.add(disReward.rewardTokenBalance);
-    //     emit claiming(payToPayee);
-    // }
+  
     
     function withdrawOwner() public onlyOwner() {
         owner.transfer(balanceOf(address(this)));
@@ -555,27 +550,26 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         external
     {
        //1 
-    //   uint256 amountDeducor = _addAmount; 
-    //      // deduction of 5% fee
-    //   uint256 _feePercantage = amountDeducor.mul(Fee);
-    //   uint256 _feeAmount  = _feePercantage.div(1e20);
-       
-    //false   
-    //   uint256 _amountPerShare1 = _feeAmount.div(2);
-    //   uint256 _amountPerShare2 = _feeAmount.div(2);
-       
-        // // transfering 2.5% each to treasury(owner) & BuyBurn
-        // stakingToken.transfer(owner, _amountPerShare1);
-        // stakingToken.transfer(BuyBurn, _amountPerShare2);
+        uint256 amountDeducor = _addAmount; 
+             // deduction of 5% fee
+        uint256 _feePercantage = amountDeducor.mul(Fee);
+        uint256 _feeAmount  = _feePercantage.div(1e20);
+           
+          
+        uint256 _amountPerShare1 = _feeAmount.div(2);
+        uint256 _amountPerShare2 = _feeAmount.div(2);
+           
+        // transfering 2.5% each to treasury(owner) & BuyBurn
+        stakingToken.transfer(treasury, _amountPerShare1);
+        stakingToken.transfer(BuyBurn, _amountPerShare2);
        
        // Stake Amount 
        
-       //owner.transfer(_feeAmount);
-       
+      
        //2
-    //   stakingToken.transferFrom(msg.sender, owner, _feeAmount);
-    //   _addAmount = _addAmount.sub(_feeAmount);
-    //   totalStake = totalStake.add(_addAmount);
+      //stakingToken.transferFrom(msg.sender, owner, _feeAmount);
+      _addAmount = _addAmount.sub(_feeAmount);
+      totalStake = totalStake.add(_addAmount);
         __stake(msg.sender, _addAmount);
         rights.push(msg.sender);
     }
@@ -616,53 +610,23 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
 
     function unstake() external  {
         
+        Staker storage stk = stakerInfo[msg.sender];
+            if(block.timestamp <= stk.stakeEnded){
+                uint Lastwithdraw = stk.withdrawn;
+                uint rewardMul = stk.reward.mul(ethManti); 
+                uint rewardPer = rewardMul.div(YEAR_DURATION);
+                uint rewardPerSec = rewardPer.div(ethManti).add(1);
+                uint remainingReward = rewardPerSec.sub(Lastwithdraw);
+                _unstake(remainingReward);
+            }
+            else if( block.timestamp >= stk.stakeEnded){
+                stk.userStakedTokens = stk.userStakedTokens.mul(0);
+                stk.stakeEnded = stk.stakeEnded.mul(0);
+                stk.stakeStarted = stk.stakeStarted.mul(0);
+                stk.lastUpdate = block.timestamp;
+            
+            }
         
-        for(uint i = 0 ; i < poolArray.length ; i++) {
-            Staker storage stk = stakerInfo[msg.sender];
-           // uint currentTime = block.timestamp;
-            
-           // if( currentTime < stk.stakeEnded  ){
-                    // if(stk.stakeStarted >= poolArray[i].checkPoint) {
-                        uint rewarded;
-                        rewarded = rewarded.add(poolArray[i].checkPoint);
-                        stakerReward storage stkRwd = rewardChecker[msg.sender][rewarded];     
-                        // uint amtPercentage;
-                        uint poolPercentage;
-                        uint userToken;
-                        uint rwdPercentage;
-                        uint reward;
-                        // if(stkRwd.paid != 1){
-                            uint ust = stk.userStakedTokens ;
-                            
-                            //********************************
-                            //************ ERROR *************
-                            //********************************
-                            
-                            uint amtPercentage = (ust.div(totalStake));
-                            poolPercentage = poolPercentage.add(amtPercentage.mul(1e20));
-                           
-                            // *********** token minted reward ************
-                            userToken = userToken.add(stk.userStakedTokens);
-                            rwdPercentage = rwdPercentage.add(poolPercentage.mul(userToken));
-                            reward = reward.add(rwdPercentage.div(1e20));
-                            emit claiming( amtPercentage );
-                            //uint rewardPay =  totalStake.sub(1);
-                            claimReward( reward );
-                            poolArray[i].rewardTokenBalance = poolArray[i].rewardTokenBalance.sub(reward);
-                            stkRwd.paid = 1 ;
-                            
-                        // }    
-                            
-                    // }
-            // }
-             if( block.timestamp >= stk.stakeEnded){
-            stk.userStakedTokens = stk.userStakedTokens.mul(0);
-            stk.stakeEnded = stk.stakeEnded.mul(0);
-            stk.stakeStarted = stk.stakeStarted.mul(0);
-            stk.lastUpdate = block.timestamp;
-            
-        }
-        }
           
          
        
@@ -670,8 +634,9 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
 
      
     function _unstake(uint _reward) internal {
-         
-     
+        Staker storage stk = stakerInfo[msg.sender];
+        stk.withdrawn = stk.withdrawn.sub(_reward); 
+        
         claimReward(_reward );
         
     } 
@@ -679,10 +644,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     
      function withdraw(uint256 _amount) internal isAccount(msg.sender){
         require(_amount > 0, "Cannot withdraw 0");
-        // require(
-        //     block.timestamp >= stakerInfo[msg.sender].stakeEnded, 
-        //     "Reward cannot be claimed before staking ends"
-        // );
+        
         
         _withdraw(_amount);
         Staker storage stk = stakerInfo[msg.sender];
@@ -710,14 +672,9 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     
     // View function to see pending Reward on frontend.
     function pendingReward(address _user) external view returns (uint256) {
-        uint rewardCalculation;
-        uint startTime;
-        //uint endTime;
+        
         Staker storage stk = stakerInfo[_user];
-        rewardCalculation = stk.reward;
-        startTime = stk.stakeStarted;
         uint Lastwithdraw = stk.withdrawn;
-        //uint timeCompleted = startTime.sub(block.timestamp);
         uint rewardMul = stk.reward.mul(ethManti); 
         uint rewardPer = rewardMul.div(YEAR_DURATION);
         uint rewardPerSec = rewardPer.div(ethManti).add(1);
@@ -746,18 +703,18 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     // *************** ADMIN ********************
     // ********************************************
 
-    function sendRewardTokens(uint256 _amount) public onlyRewardsDistributor {
+    function EmergencysendRewardTokens(uint256 _amount) public onlyRewardsDistributor {
         require(rewardsToken.transferFrom(msg.sender, address(this), _amount), "Transfering not approved!");
     }
     
-    function withdrawRewardTokens(address receiver, uint256 _amount)  public onlyRewardsDistributor{
+    function EmergencywithdrawRewardTokens(address receiver, uint256 _amount)  public onlyRewardsDistributor{
        
         require(rewardsToken.transfer(receiver, _amount), "Not enough tokens on contract!");
         
         
     }
     
-    function withdrawStakeTokens(address receiver, uint256 _amount) public onlyRewardsDistributor{
+    function EmergencywithdrawStakeTokens(address receiver, uint256 _amount) public onlyRewardsDistributor{
         require(stakingToken.transfer(receiver, _amount), "Not enough tokens on contract!");
         
     }
