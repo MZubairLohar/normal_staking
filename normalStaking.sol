@@ -561,6 +561,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         // transfering 2.5% each to treasury(owner) & BuyBurn
         stakingToken.transfer(treasury, _amountPerShare1);
         stakingToken.transfer(BuyBurn, _amountPerShare2);
+        
        
        // Stake Amount 
         uint _amount = _addAmount.sub(_feeAmount);
@@ -607,11 +608,12 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         
         Staker storage stk = stakerInfo[msg.sender];
             if(block.timestamp <= stk.stakeEnded){
-                uint Lastwithdraw = stk.withdrawn;
+               
                 uint rewardMul = stk.reward.mul(ethManti); 
                 uint rewardPer = rewardMul.div(YEAR_DURATION);
                 uint rewardPerSec = rewardPer.div(ethManti);
-                uint remainingReward = rewardPerSec.sub(Lastwithdraw);
+                uint rewardGenerated = rewardPerSec.mul(stk.stakeStarted);
+                uint remainingReward = rewardGenerated.sub(stk.withdrawn);
                 
                 _unstake(remainingReward);
             }
@@ -670,11 +672,12 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     function pendingReward(address _user) external view returns (uint256) {
         
         Staker storage stk = stakerInfo[_user];
-        uint Lastwithdraw = stk.withdrawn;
         uint rewardMul = stk.reward.mul(ethManti); 
         uint rewardPer = rewardMul.div(YEAR_DURATION);
         uint rewardPerSec = rewardPer.div(ethManti);
-        uint remainingReward = rewardPerSec.sub(Lastwithdraw);
+        uint rewardGenerated = rewardPerSec.mul(stk.stakeStarted);
+        uint remainingReward = rewardGenerated.sub(stk.withdrawn);
+        
         return(remainingReward);
         
     }
