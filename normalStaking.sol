@@ -420,6 +420,8 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     uint256 public totalStake = 1; 
     //     ************ percentages ***********
     uint256 internal Fee = 5e18; // 5%
+    uint256 internal feeDuducer = 25e17; // 2.5%
+    
     uint256 internal rewardPercent = 2e18; // 200%
     
     //****************** DAYS ********************
@@ -542,28 +544,28 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         // payable
         external
     {
-       //1 
-        uint256 amountDeducor = _addAmount; 
+       
+        
              // deduction of 5% fee
-        uint256 _feePercantage = amountDeducor.mul(Fee);
+             
+        uint256 _feePercantage = _addAmount.mul(Fee);
         uint256 _feeAmount  = _feePercantage.div(1e20);
-           
-          
-        uint256 _amountPerShare1 = _feeAmount.div(2);
-        uint256 _amountPerShare2 = _feeAmount.div(2);
+        
+        // duducing & transfering 
+        //2.5% each to treasury & BuyBurn   
+        uint deducePercent = _feeAmount.mul(feeDuducer);
+        uint share = deducePercent.div(1e20);
+        uint256 _amountPerShare1 = share;
+        uint256 _amountPerShare2 = share;
            
         // transfering 2.5% each to treasury(owner) & BuyBurn
         stakingToken.transfer(treasury, _amountPerShare1);
         stakingToken.transfer(BuyBurn, _amountPerShare2);
        
        // Stake Amount 
-       
-      
-       //2
-      //stakingToken.transferFrom(msg.sender, owner, _feeAmount);
-      _addAmount = _addAmount.sub(_feeAmount);
-      totalStake = totalStake.add(_addAmount);
-        __stake(msg.sender, _addAmount);
+        uint _amount = _addAmount.sub(_feeAmount);
+        totalStake = totalStake.add(_amount);
+        __stake(msg.sender, _amount);
         rights.push(msg.sender);
     }
    
@@ -608,7 +610,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
                 uint Lastwithdraw = stk.withdrawn;
                 uint rewardMul = stk.reward.mul(ethManti); 
                 uint rewardPer = rewardMul.div(YEAR_DURATION);
-                uint rewardPerSec = rewardPer.div(ethManti).add(1);
+                uint rewardPerSec = rewardPer.div(ethManti);
                 uint remainingReward = rewardPerSec.sub(Lastwithdraw);
                 
                 _unstake(remainingReward);
@@ -671,7 +673,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         uint Lastwithdraw = stk.withdrawn;
         uint rewardMul = stk.reward.mul(ethManti); 
         uint rewardPer = rewardMul.div(YEAR_DURATION);
-        uint rewardPerSec = rewardPer.div(ethManti).add(1);
+        uint rewardPerSec = rewardPer.div(ethManti);
         uint remainingReward = rewardPerSec.sub(Lastwithdraw);
         return(remainingReward);
         
