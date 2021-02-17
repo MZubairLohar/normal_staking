@@ -416,18 +416,18 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     
     IERC20 public rewardsToken;
     uint256 constant internal oneDay  = 86400 ;
-    uint256 minStakeAmount = 1 * 10e20 ;
+    uint256 minStakeAmount = 1 * 1e20 ;
     uint256 public totalStake = 1; 
     //     ************ percentages ***********
     uint256 internal Fee = 5e18; // 5%
-    uint256 internal rewardPercent = 2e20; // 100%
+    uint256 internal rewardPercent = 2e18; // 200%
     
     //****************** DAYS ********************
-    uint256 public constant YEAR_DURATION   = 31536000;
+    uint256 public constant YEAR_DURATION   = 31557600 seconds;
    
     uint256 internal stakingDuration = 0;
     uint256 internal poolId = 1 ;
-    
+    uint256 internal ethManti = 1e18;
     
     uint256 contractBalance;
     uint256 lastRewardUpdate;
@@ -711,17 +711,18 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     // View function to see pending Reward on frontend.
     function pendingReward(address _user) external view returns (uint256) {
         uint rewardCalculation;
-        //uint Lastwithdraw;
         uint startTime;
         //uint endTime;
         Staker storage stk = stakerInfo[_user];
         rewardCalculation = stk.reward;
         startTime = stk.stakeStarted;
-        //endTime = stk.stakeEnded;
-        //Lastwithdraw = stk.withdrawn;
+        uint Lastwithdraw = stk.withdrawn;
         //uint timeCompleted = startTime.sub(block.timestamp);
-        //uint rewardPerSec = rewardCalculation.div(YEAR_DURATION);
-        return(rewardCalculation);
+        uint rewardMul = stk.reward.mul(ethManti); 
+        uint rewardPer = rewardMul.div(YEAR_DURATION);
+        uint rewardPerSec = rewardPer.div(ethManti).add(1);
+        uint remainingReward = rewardPerSec.sub(Lastwithdraw);
+        return(remainingReward);
         
     }
 
