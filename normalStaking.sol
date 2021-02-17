@@ -430,9 +430,9 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     uint256 internal ethManti = 1e18;
     
     uint256 contractBalance;
-    Pool[] public poolArray;
+    uint256 pool;
     address[] rights;
-    uint256[] poolCheckPonts;
+    
 
 // ********************************************    
 // *************** EVENTS ********************
@@ -493,11 +493,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         uint256 reward;
         uint256 withdrawn; 
     }
-    struct Pool {
-        uint256 poolId;
-        uint256 checkPoint;
-        uint256 rewardTokenBalance;
-    }
+   
 
     
   
@@ -527,10 +523,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     
     
     function createPool(uint256 _amount) public  {
-        Pool memory newPool = Pool( poolId , block.timestamp , _amount);
-        poolArray.push(newPool);
-        poolId = poolId.add(1);
-        poolCheckPonts.push(newPool.checkPoint);
+        pool = pool.add(_amount);
      
     }
   
@@ -617,6 +610,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
                 uint rewardPer = rewardMul.div(YEAR_DURATION);
                 uint rewardPerSec = rewardPer.div(ethManti).add(1);
                 uint remainingReward = rewardPerSec.sub(Lastwithdraw);
+                
                 _unstake(remainingReward);
             }
             else if( block.timestamp >= stk.stakeEnded){
@@ -636,7 +630,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     function _unstake(uint _reward) internal {
         Staker storage stk = stakerInfo[msg.sender];
         stk.withdrawn = stk.withdrawn.sub(_reward); 
-        
+        pool = pool.sub(_reward);
         claimReward(_reward );
         
     } 
