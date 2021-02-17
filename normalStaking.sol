@@ -674,8 +674,10 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         Staker storage stk = stakerInfo[_user];
         uint rewardMul = stk.reward.mul(ethManti); 
         uint rewardPer = rewardMul.div(YEAR_DURATION);
-        uint rewardPerSec = rewardPer.div(ethManti);
-        uint rewardGenerated = rewardPerSec.mul(stk.stakeStarted);
+        uint decade =  (block.timestamp).sub(stk.stakeStarted);
+        uint reward =  decade; 
+        uint rewardPerSec = rewardPer.mul(reward);
+        uint rewardGenerated = rewardPerSec.div(ethManti);
         uint remainingReward = rewardGenerated.sub(stk.withdrawn);
         
         return(remainingReward);
