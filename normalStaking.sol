@@ -21,59 +21,31 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 library SafeMath {
+  function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a * b;
+    assert(a == 0 || c / a == b);
+    return c;
+  }
 
-    function add(uint256 a, uint256 b) internal pure returns (uint256) {
-        uint256 c = a + b;
-        require(c >= a, "SafeMath: addition overflow");
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+    // assert(b > 0); // Solidity automatically throws when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return c;
+  }
 
-        return c;
-    }
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b <= a);
+    return a - b;
+  }
 
-    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-        return sub(a, b, "SafeMath: subtraction overflow");
-    }
-
-    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        require(b <= a, errorMessage);
-        uint256 c = a - b;
-
-        return c;
-    }
-
-    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
-        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
-        // benefit is lost if 'b' is also tested.
-        // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
-        if (a == 0) {
-            return 0;
-        }
-
-        uint256 c = a * b;
-        require(c / a == b, "SafeMath: multiplication overflow");
-
-        return c;
-    }
-
-    function div(uint256 a, uint256 b) internal pure returns (uint256) {
-        return div(a, b, "SafeMath: division by zero");
-    }
-
-    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        require(b > 0, errorMessage);
-        uint256 c = a / b;
-
-        return c;
-    }
-
-    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
-        return mod(a, b, "SafeMath: modulo by zero");
-    }
-
-    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
-        require(b != 0, errorMessage);
-        return a % b;
-    }
+  function add(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a + b;
+    assert(c >= a);
+    return c;
+  }
 }
+
 library SafeERC20 {
     using SafeMath for uint256;
     using Address for address;
@@ -103,7 +75,7 @@ library SafeERC20 {
     }
 
     function safeDecreaseAllowance(IERC20 token, address spender, uint256 value) internal {
-        uint256 newAllowance = token.allowance(address(this), spender).sub(value, "SafeERC20: decreased allowance below zero");
+        uint256 newAllowance = token.allowance(address(this), spender).sub(value);
         callOptionalReturn(token, abi.encodeWithSelector(token.approve.selector, spender, newAllowance));
     }
 
@@ -419,14 +391,14 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     uint256 minStakeAmount = 1 * 1e20 ;
     uint256 public totalStake = 1; 
     //     ************ percentages ***********
-    uint256 internal Fee = 5e18; // 5%
-    uint256 internal feeDuducer = 25e17; // 2.5%
+    uint256 internal Fee = 2e18; // 2.5%
+    uint256 internal feeDuducer = 5e18; // 2.5%
     
     uint256 internal rewardPercent = 2e18; // 200%
     
     //****************** DAYS ********************
-    uint256 public constant YEAR_DURATION   = 31557600 seconds;
-   
+   // uint256 public constant YEAR_DURATION   = 31557600 seconds;
+    uint256 public constant YEAR_DURATION   = 90 seconds;
     uint256 internal stakingDuration = 0;
     uint256 internal poolId = 1 ;
     uint256 internal ethManti = 1e18;
@@ -445,6 +417,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     event Withdrawn(address indexed user, uint256 amount);
     event RewardPaid(address indexed user, uint256 reward);
     event claiming(uint rewardInContract);
+    event checker( uint Withdraw);
     
 // ********************************************    
 // *************** CONSTRUCTOR ********************
@@ -559,8 +532,8 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         uint256 _amountPerShare2 = share;
            
         // transfering 2.5% each to treasury(owner) & BuyBurn
-        stakingToken.transfer(treasury, _amountPerShare1);
-        stakingToken.transfer(BuyBurn, _amountPerShare2);
+        stakingToken.transferFrom(msg.sender, treasury, _amountPerShare1);
+        stakingToken.transferFrom(msg.sender, BuyBurn, _amountPerShare2);
         
        
        // Stake Amount 
@@ -607,19 +580,24 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     function unstake() external  {
         
         Staker storage stk = stakerInfo[msg.sender];
-            if(block.timestamp <= stk.stakeEnded){
-               
+           // if(block.timestamp <= stk.stakeEnded){
+                uint ToBeRewarded =  stk.reward;
+                uint withdraw = stk.withdrawn;
                 uint rewardMul = stk.reward.mul(ethManti); 
                 uint rewardPer = rewardMul.div(YEAR_DURATION);
                 uint decade =  (block.timestamp).sub(stk.stakeStarted);
-                
                 uint rewardPerSec = rewardPer.mul(decade);
                 uint rewardGenerated = rewardPerSec.div(ethManti);
-                uint remainingReward = rewardGenerated.sub(stk.withdrawn);
-                        
-                _unstake(remainingReward);
-            }
-            else if( block.timestamp >= stk.stakeEnded){
+                uint Reward = rewardGenerated.sub(withdraw);
+                if(Reward <= ToBeRewarded){
+                _unstake(Reward);
+                }
+                else if(Reward > ToBeRewarded){
+                   _unstake(ToBeRewarded);    
+                }
+                
+           // }
+               if( block.timestamp > stk.stakeEnded){
                 stk.userStakedTokens = stk.userStakedTokens.mul(0);
                 stk.stakeEnded = stk.stakeEnded.mul(0);
                 stk.stakeStarted = stk.stakeStarted.mul(0);
@@ -635,10 +613,11 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
      
     function _unstake(uint _reward) internal {
         Staker storage stk = stakerInfo[msg.sender];
-        stk.withdrawn = stk.withdrawn.sub(_reward); 
-        pool = pool.sub(_reward);
-        claimReward(_reward );
+        stk.withdrawn = stk.withdrawn.add(_reward); 
         
+        pool = pool-(_reward);
+        claimReward(_reward );
+        //withdraw(_reward);
     } 
     
     
@@ -674,16 +653,25 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     function pendingReward(address _user) external view returns (uint256) {
         
         Staker storage stk = stakerInfo[_user];
-        uint rewardMul = stk.reward.mul(ethManti); 
-        uint rewardPer = rewardMul.div(YEAR_DURATION);
-        uint decade =  (block.timestamp).sub(stk.stakeStarted);
+            uint rewardMul = stk.reward.mul(ethManti); 
+            uint rewardPer = rewardMul.div(YEAR_DURATION);
+            uint decade =  (block.timestamp).sub(stk.stakeStarted);
+            
+            uint rewardPerSec = rewardPer.mul(decade);
+            uint rewardGenerated = rewardPerSec.div(ethManti);
+            uint Reward = rewardGenerated.sub(stk.withdrawn);
+            if(Reward <= stk.reward){
+              //uint remainingReward = rewardPerSec.sub(stk.withdrawn);
+              //uint Reward = remainingReward.div(1000);
+            return(Reward);
+                
+            }else{
+                paid(stk.reward);
+            }
+    }
+    function paid(uint _reward)internal pure returns(uint , string memory){
         
-        uint rewardPerSec = rewardPer.mul(decade);
-        uint rewardGenerated = rewardPerSec.div(ethManti);
-        uint remainingReward = rewardGenerated.sub(stk.withdrawn);
-        
-        return(remainingReward);
-        
+        return(_reward , "All of you reward is generated");
     }
 
     function getRewardToken() external view returns (IERC20){
