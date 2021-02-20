@@ -35,7 +35,7 @@ library SafeMath {
   }
 
   function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-    assert(b <= a);
+    //assert(b <= a);
     return a - b;
   }
 
@@ -388,7 +388,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     address payable treasury;
     
     IERC20 public rewardsToken;
-    uint256 minStakeAmount = 1 * 1e20 ;
+    uint256 minStakeAmount = 1 * 1e18 ;
     uint256 public totalStake = 1; 
     //     ************ percentages ***********
     uint256 internal Fee = 5e18; // 5%
@@ -403,8 +403,8 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     uint256 internal poolId = 1 ;
     uint256 internal ethManti = 1e18;
     
-    uint256 contractBalance;
-    uint256 pool;
+    uint256 public contractBalance;
+    uint256 public pool;
     address[] rights;
     
 
@@ -437,6 +437,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
              owner = _rewardsDistributor;
              BuyBurn = _buyAndBurn;
              treasury = _treasury;
+             
     }
             
 // ********************************************    
@@ -497,7 +498,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     
     
     
-    function createPool(uint256 _amount) public  {
+    function createPool(uint256 _amount) public onlyOwner() {
         pool = pool.add(_amount);
      
     }
@@ -578,55 +579,19 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     }
 
     function unstake() external  {
+        uint reward = RewardCalculator(msg.sender);
+        _unstake(reward);
         
-        Staker storage stk = stakerInfo[msg.sender];
-           // if(block.timestamp <= stk.stakeEnded){
-                uint ToBeRewarded =  stk.reward;
-                uint withdraw = stk.withdrawn;
-                uint rewardMul = stk.reward.mul(ethManti); 
-                uint rewardPer = rewardMul.div(YEAR_DURATION);
-                uint decade =  (block.timestamp).sub(stk.stakeStarted);
-                uint rewardPerSec = rewardPer.mul(decade);
-                uint rewardGenerated = rewardPerSec.div(ethManti);
-                uint Reward = rewardGenerated - (withdraw);
-                if(Reward <= ToBeRewarded){
-                _unstake(Reward);
-                }
-                else if(Reward > ToBeRewarded){
-                   _unstake(ToBeRewarded);    
-                }
-                
-           // }
-               if( block.timestamp > stk.stakeEnded){
-                stk.userStakedTokens = stk.userStakedTokens.mul(0);
-                stk.stakeEnded = stk.stakeEnded.mul(0);
-                stk.stakeStarted = stk.stakeStarted.mul(0);
-                stk.lastUpdate = block.timestamp;
-            
-            }
-        
-          
-         
-       
-     }
+    } 
 
      
     function _unstake(uint _reward) internal {
         Staker storage stk = stakerInfo[msg.sender];
-        uint rewardCheck = stk.reward;
-        uint withdrawn = stk.withdrawn;
-        if(_reward == rewardCheck ){
-            _reward = _reward.sub(withdrawn);
-            stk.withdrawn = stk.withdrawn.add(_reward); 
-            pool = pool-(_reward);
-            claimReward(_reward );
-            //withdraw(_reward);    
-        }
-        else{
-            stk.withdrawn = stk.withdrawn.add(_reward); 
-            pool = pool-(_reward);
-            claimReward(_reward );
-        }
+         uint withdrawn = stk.withdrawn;
+         stk.withdrawn = withdrawn.add(_reward);
+         pool = pool-(_reward);
+         claimReward(_reward);
+       
         
         
     } 
@@ -634,8 +599,6 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     
      function withdraw(uint256 _amount) internal isAccount(msg.sender){
         require(_amount > 0, "Cannot withdraw 0");
-        
-        
         _withdraw(_amount);
         Staker storage stk = stakerInfo[msg.sender];
         stk.lastUpdate = stk.lastUpdate.add(block.timestamp);
@@ -645,9 +608,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     }
 
     function claimReward(uint256 amount) internal isAccount(msg.sender){
-            Staker storage stkr = stakerInfo[msg.sender];
             rewardsToken.transfer(msg.sender, amount);
-            stkr.withdrawn = stkr.withdrawn.add(amount); 
             emit RewardPaid(msg.sender, amount);
             
         
@@ -661,7 +622,12 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     // ********************************************
     
     // View function to see pending Reward on frontend.
-    function pendingReward(address _user) external view returns (uint256) {
+    function pendingReward() public view returns(uint ){
+        uint reward = RewardCalculator(msg.sender);
+        return (reward);
+    }
+    
+    function RewardCalculator(address _user) internal view returns (uint256) {
         
         Staker storage stk = stakerInfo[_user];
             uint rewardMul = stk.reward.mul(ethManti); 
