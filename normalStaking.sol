@@ -391,8 +391,8 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     uint256 minStakeAmount = 1 * 1e20 ;
     uint256 public totalStake = 1; 
     //     ************ percentages ***********
-    uint256 internal Fee = 2e18; // 2.5%
-    uint256 internal feeDuducer = 5e18; // 2.5%
+    uint256 internal Fee = 5e18; // 5%
+    uint256 internal feeDuducer = 5e19; // 1/5
     
     uint256 internal rewardPercent = 2e18; // 200%
     
@@ -588,7 +588,7 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
                 uint decade =  (block.timestamp).sub(stk.stakeStarted);
                 uint rewardPerSec = rewardPer.mul(decade);
                 uint rewardGenerated = rewardPerSec.div(ethManti);
-                uint Reward = rewardGenerated.sub(withdraw);
+                uint Reward = rewardGenerated - (withdraw);
                 if(Reward <= ToBeRewarded){
                 _unstake(Reward);
                 }
@@ -613,11 +613,22 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
      
     function _unstake(uint _reward) internal {
         Staker storage stk = stakerInfo[msg.sender];
-        stk.withdrawn = stk.withdrawn.add(_reward); 
+        uint rewardCheck = stk.reward;
+        uint withdrawn = stk.withdrawn;
+        if(_reward == rewardCheck ){
+            _reward = _reward.sub(withdrawn);
+            stk.withdrawn = stk.withdrawn.add(_reward); 
+            pool = pool-(_reward);
+            claimReward(_reward );
+            //withdraw(_reward);    
+        }
+        else{
+            stk.withdrawn = stk.withdrawn.add(_reward); 
+            pool = pool-(_reward);
+            claimReward(_reward );
+        }
         
-        pool = pool-(_reward);
-        claimReward(_reward );
-        //withdraw(_reward);
+        
     } 
     
     
@@ -661,18 +672,15 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
             uint rewardGenerated = rewardPerSec.div(ethManti);
             uint Reward = rewardGenerated.sub(stk.withdrawn);
             if(Reward <= stk.reward){
-              //uint remainingReward = rewardPerSec.sub(stk.withdrawn);
-              //uint Reward = remainingReward.div(1000);
-            return(Reward);
+                //uint remainingReward = rewardPerSec.sub(stk.withdrawn);
+                //uint Reward = remainingReward.div(1000);
+                return(Reward);
                 
             }else{
-                paid(stk.reward);
+                return(stk.reward);
             }
     }
-    function paid(uint _reward)internal pure returns(uint , string memory){
-        
-        return(_reward , "All of you reward is generated");
-    }
+    
 
     function getRewardToken() external view returns (IERC20){
         return rewardsToken;
