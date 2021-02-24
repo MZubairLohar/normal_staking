@@ -1,0 +1,281 @@
+{
+  "contractName": "IRewardsDistributionRecipient",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getRewardToken",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: UNLICENSED\r\n\r\npragma solidity ^0.5.0;\r\n\r\nimport './IERC20.sol';\r\n\r\ninterface IRewardsDistributionRecipient {\r\n    // function notifyRewardAmount(uint256 reward) external;\r\n    function getRewardToken() external view returns (IERC20);\r\n}",
+  "sourcePath": "F:\\Programming\\Programming_Projects\\blockchain\\solidity\\normal_staking\\contracts\\IRewardsDistributionRecipient.sol",
+  "ast": {
+    "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IRewardsDistributionRecipient.sol",
+    "exportedSymbols": {
+      "IRewardsDistributionRecipient": [
+        221
+      ]
+    },
+    "id": 222,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 214,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "42:23:3"
+      },
+      {
+        "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol",
+        "file": "./IERC20.sol",
+        "id": 215,
+        "nodeType": "ImportDirective",
+        "scope": 222,
+        "sourceUnit": 213,
+        "src": "69:22:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 221,
+        "linearizedBaseContracts": [
+          221
+        ],
+        "name": "IRewardsDistributionRecipient",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 220,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getRewardToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 216,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "227:2:3"
+            },
+            "returnParameters": {
+              "id": 219,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 218,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 220,
+                  "src": "253:6:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$212",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 217,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 212,
+                    "src": "253:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$212",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "252:8:3"
+            },
+            "scope": 221,
+            "src": "204:57:3",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 222,
+        "src": "95:169:3"
+      }
+    ],
+    "src": "42:222:3"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IRewardsDistributionRecipient.sol",
+      "exportedSymbols": {
+        "IRewardsDistributionRecipient": [
+          221
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".0"
+          ]
+        },
+        "id": 214,
+        "name": "PragmaDirective",
+        "src": "42:23:3"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 213,
+          "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol",
+          "file": "./IERC20.sol",
+          "scope": 222,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 215,
+        "name": "ImportDirective",
+        "src": "69:22:3"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            221
+          ],
+          "name": "IRewardsDistributionRecipient",
+          "scope": 222
+        },
+        "children": [
+          {
+            "attributes": {
+              "body": null,
+              "documentation": null,
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "getRewardToken",
+              "scope": 221,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 216,
+                "name": "ParameterList",
+                "src": "227:2:3"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 220,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract IERC20",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "IERC20",
+                          "referencedDeclaration": 212,
+                          "type": "contract IERC20"
+                        },
+                        "id": 217,
+                        "name": "UserDefinedTypeName",
+                        "src": "253:6:3"
+                      }
+                    ],
+                    "id": 218,
+                    "name": "VariableDeclaration",
+                    "src": "253:6:3"
+                  }
+                ],
+                "id": 219,
+                "name": "ParameterList",
+                "src": "252:8:3"
+              }
+            ],
+            "id": 220,
+            "name": "FunctionDefinition",
+            "src": "204:57:3"
+          }
+        ],
+        "id": 221,
+        "name": "ContractDefinition",
+        "src": "95:169:3"
+      }
+    ],
+    "id": 222,
+    "name": "SourceUnit",
+    "src": "42:222:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.3",
+  "updatedAt": "2021-02-24T07:07:10.085Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
