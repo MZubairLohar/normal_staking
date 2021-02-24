@@ -7,6 +7,7 @@
       "name": "getRewardToken",
       "outputs": [
         {
+          "internalType": "contract IERC20",
           "name": "",
           "type": "address"
         }
@@ -16,7 +17,7 @@
       "type": "function"
     }
   ],
-  "metadata": "",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"getRewardToken\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IRewardsDistributionRecipient.sol\":\"IRewardsDistributionRecipient\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol\":{\"keccak256\":\"0x0e28f9521b97eb3257386db13b3e170c549ab49a00aded3d49dfd2947390d69e\",\"urls\":[\"bzz-raw://d40b8f1e064fb96efadbfa2abd45344ddfd381dfbdc4d2b7d8db290b46edc153\",\"dweb:/ipfs/QmX4PJk4yWGSVBZYwU67igwVrADipTGPjfBGZ7UXWoUw7r\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IRewardsDistributionRecipient.sol\":{\"keccak256\":\"0x71a2c7bd4ba3c5bd6aebb9055662a8b089e519e456b70862d1b5b8f6c7948568\",\"urls\":[\"bzz-raw://ec887f3fa44c162bc5b7595808e058c87c94c120fef85dbf3e6f53cbd7b2ca0f\",\"dweb:/ipfs/QmPe2esoQU1aszum7e8BuDPjSgYdexdstCwzKDUvqJbgdp\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -267,11 +268,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+    "version": "0.5.17+commit.d19bba13.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-02-24T07:07:10.085Z",
+  "updatedAt": "2021-02-24T07:14:15.255Z",
   "devdoc": {
     "methods": {}
   },
