@@ -1,6 +1,6 @@
-const StakingToken = artifacts.require('StakingToken');
-const RewardToken = artifacts.require('RewardToken');
-const NormalStaking = artifacts.require('NormalStaking');
+const StakingToken = artifacts.require('./StakingToken.sol');
+const RewardToken = artifacts.require('./RewardToken.sol');
+const NormalStaking = artifacts.require('./NormalStaking.sol');
 
 function tokens(n) {
   return web3.utils.toWei(n, 'ether');

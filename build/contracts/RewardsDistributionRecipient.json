@@ -44,15 +44,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_rewardsDistributor\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"getRewardToken\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rewardsDistributor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"constructor\":{\"details\":\"Recipient is a module, governed by mStable governance \"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/RewardsDistributionRecipient.sol\":\"RewardsDistributionRecipient\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol\":{\"keccak256\":\"0x0e28f9521b97eb3257386db13b3e170c549ab49a00aded3d49dfd2947390d69e\",\"urls\":[\"bzz-raw://d40b8f1e064fb96efadbfa2abd45344ddfd381dfbdc4d2b7d8db290b46edc153\",\"dweb:/ipfs/QmX4PJk4yWGSVBZYwU67igwVrADipTGPjfBGZ7UXWoUw7r\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IRewardsDistributionRecipient.sol\":{\"keccak256\":\"0x71a2c7bd4ba3c5bd6aebb9055662a8b089e519e456b70862d1b5b8f6c7948568\",\"urls\":[\"bzz-raw://ec887f3fa44c162bc5b7595808e058c87c94c120fef85dbf3e6f53cbd7b2ca0f\",\"dweb:/ipfs/QmPe2esoQU1aszum7e8BuDPjSgYdexdstCwzKDUvqJbgdp\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/RewardsDistributionRecipient.sol\":{\"keccak256\":\"0x7c96ebaf4eeac7bdc9b69ad4762e2f4405ff1a024cfeb2b2044d05d3beeeb64f\",\"urls\":[\"bzz-raw://0c5df2d2faf06414209b24fd005d0545a827a3c197746540c94b917ad3e7b380\",\"dweb:/ipfs/QmekHbMvYx2tEWYAFdBfWjU4B2xmweSXx9mHGj8eG1HCX5\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_rewardsDistributor\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[],\"name\":\"getRewardToken\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rewardsDistributor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"constructor\":{\"details\":\"Recipient is a module, governed by mStable governance \"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/RewardsDistributionRecipient.sol\":\"RewardsDistributionRecipient\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IERC20.sol\":{\"keccak256\":\"0x0e28f9521b97eb3257386db13b3e170c549ab49a00aded3d49dfd2947390d69e\",\"urls\":[\"bzz-raw://d40b8f1e064fb96efadbfa2abd45344ddfd381dfbdc4d2b7d8db290b46edc153\",\"dweb:/ipfs/QmX4PJk4yWGSVBZYwU67igwVrADipTGPjfBGZ7UXWoUw7r\"]},\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IRewardsDistributionRecipient.sol\":{\"keccak256\":\"0x71a2c7bd4ba3c5bd6aebb9055662a8b089e519e456b70862d1b5b8f6c7948568\",\"urls\":[\"bzz-raw://ec887f3fa44c162bc5b7595808e058c87c94c120fef85dbf3e6f53cbd7b2ca0f\",\"dweb:/ipfs/QmPe2esoQU1aszum7e8BuDPjSgYdexdstCwzKDUvqJbgdp\"]},\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/RewardsDistributionRecipient.sol\":{\"keccak256\":\"0x7c96ebaf4eeac7bdc9b69ad4762e2f4405ff1a024cfeb2b2044d05d3beeeb64f\",\"urls\":[\"bzz-raw://0c5df2d2faf06414209b24fd005d0545a827a3c197746540c94b917ad3e7b380\",\"dweb:/ipfs/QmekHbMvYx2tEWYAFdBfWjU4B2xmweSXx9mHGj8eG1HCX5\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: UNLICENSED\r\n\r\npragma solidity ^0.5.0;\r\n\r\nimport './IRewardsDistributionRecipient.sol';\r\nimport './IERC20.sol';\r\n\r\ncontract RewardsDistributionRecipient is IRewardsDistributionRecipient {\r\n\r\n    // @abstract\r\n    // function notifyRewardAmount(uint256 reward) external;\r\n    function getRewardToken() external view returns (IERC20);\r\n\r\n    // This address has the ability to distribute the rewards\r\n    address public rewardsDistributor;\r\n\r\n    /** @dev Recipient is a module, governed by mStable governance */\r\n    constructor(address _rewardsDistributor) \r\n        internal\r\n    {\r\n        rewardsDistributor = _rewardsDistributor;\r\n    }\r\n\r\n    /**\r\n     * @dev Only the rewards distributor can notify about rewards\r\n     */\r\n    modifier onlyRewardsDistributor() {\r\n        require(msg.sender == rewardsDistributor, \"Caller is not reward distributor\");\r\n        _;\r\n    }\r\n}",
-  "sourcePath": "F:\\Programming\\Programming_Projects\\blockchain\\solidity\\normal_staking\\contracts\\RewardsDistributionRecipient.sol",
+  "sourcePath": "C:\\Users\\Lenovo\\Documents\\clients\\international client\\normal staking\\normal_staking\\contracts\\RewardsDistributionRecipient.sol",
   "ast": {
-    "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/RewardsDistributionRecipient.sol",
+    "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/RewardsDistributionRecipient.sol",
     "exportedSymbols": {
       "RewardsDistributionRecipient": [
         1333
@@ -73,7 +73,7 @@
         "src": "42:23:8"
       },
       {
-        "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IRewardsDistributionRecipient.sol",
+        "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IRewardsDistributionRecipient.sol",
         "file": "./IRewardsDistributionRecipient.sol",
         "id": 1300,
         "nodeType": "ImportDirective",
@@ -84,7 +84,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol",
+        "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IERC20.sol",
         "file": "./IERC20.sol",
         "id": 1301,
         "nodeType": "ImportDirective",
@@ -481,7 +481,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/RewardsDistributionRecipient.sol",
+      "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/RewardsDistributionRecipient.sol",
       "exportedSymbols": {
         "RewardsDistributionRecipient": [
           1333
@@ -505,7 +505,7 @@
       {
         "attributes": {
           "SourceUnit": 222,
-          "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IRewardsDistributionRecipient.sol",
+          "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IRewardsDistributionRecipient.sol",
           "file": "./IRewardsDistributionRecipient.sol",
           "scope": 1334,
           "symbolAliases": [
@@ -520,7 +520,7 @@
       {
         "attributes": {
           "SourceUnit": 213,
-          "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol",
+          "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IERC20.sol",
           "file": "./IERC20.sol",
           "scope": 1334,
           "symbolAliases": [
@@ -972,7 +972,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-02-24T07:14:15.299Z",
+  "updatedAt": "2021-02-24T07:47:16.436Z",
   "devdoc": {
     "methods": {
       "constructor": {

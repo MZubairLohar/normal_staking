@@ -65,15 +65,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stakingToken\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"stakingToken\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/StakingTokenWrapper.sol\":\"StakingTokenWrapper\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/Address.sol\":{\"keccak256\":\"0x34776453b5242dab2826f07efbf608fe5f004127193635348808eae57d2a1140\",\"urls\":[\"bzz-raw://5723a08837f90d098c667fe5a3a0bbbb36376dce6ae584d8ac4c7f18b7756c53\",\"dweb:/ipfs/QmRnspAFNskUhpy8T21QFFUksLCbzXf3KEFY2TaPWJ8hw3\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol\":{\"keccak256\":\"0x0e28f9521b97eb3257386db13b3e170c549ab49a00aded3d49dfd2947390d69e\",\"urls\":[\"bzz-raw://d40b8f1e064fb96efadbfa2abd45344ddfd381dfbdc4d2b7d8db290b46edc153\",\"dweb:/ipfs/QmX4PJk4yWGSVBZYwU67igwVrADipTGPjfBGZ7UXWoUw7r\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/ReentrancyGuard.sol\":{\"keccak256\":\"0x433e3d9dbfa60a2419d308708700eef8c72dadc07e8394ec3c9b777d2586fb3f\",\"urls\":[\"bzz-raw://489f6aa435d170563377aac7ab003c0b711ef84cafc1c2901e410f8ad8b13b82\",\"dweb:/ipfs/QmYWt7cNbjF8uqypa9WYukSBKidJyj36cYjZdhTfBdkxcc\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/SafeERC20.sol\":{\"keccak256\":\"0x3b870b196eac5ae5254f07a8b154c74d06851b533fed94957e95ce52c75f7363\",\"urls\":[\"bzz-raw://8c80ba19a93b14d4cc74e50c5d628fefdd20d94dea11e9008e876c2f0705d907\",\"dweb:/ipfs/QmUJ2FJ5GmZ1cPDy7etAJhs7kJQr8quRC222Fufu9f3uz8\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/SafeMath.sol\":{\"keccak256\":\"0xce55eafd67f40d321975fe60c31755e70350cc7bcc01000542feb1cdc9dc11b4\",\"urls\":[\"bzz-raw://7079b687f9c4f0def1edcb0407f7e5957aaf7dc66f3065fc1f974ae61241b4e0\",\"dweb:/ipfs/QmRB7PyZD9TKFW5JZKYHuDLwPN9DVzxGi2pXyv9D4e1r4A\"]},\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/StakingTokenWrapper.sol\":{\"keccak256\":\"0x47da8b5ffc419c49d087167c9ab8a662fb2adfec1ba4ec37ff23162afa45d93e\",\"urls\":[\"bzz-raw://09472b9c736fcaeba1d61453778d5fa1f27cc5a8fafc68993da326bc562122b4\",\"dweb:/ipfs/QmNi93Aom3XYwHXHSLygbn6K4yrsiq897wrerUU6vFT3Nh\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_stakingToken\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"stakingToken\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/StakingTokenWrapper.sol\":\"StakingTokenWrapper\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/Address.sol\":{\"keccak256\":\"0x34776453b5242dab2826f07efbf608fe5f004127193635348808eae57d2a1140\",\"urls\":[\"bzz-raw://5723a08837f90d098c667fe5a3a0bbbb36376dce6ae584d8ac4c7f18b7756c53\",\"dweb:/ipfs/QmRnspAFNskUhpy8T21QFFUksLCbzXf3KEFY2TaPWJ8hw3\"]},\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IERC20.sol\":{\"keccak256\":\"0x0e28f9521b97eb3257386db13b3e170c549ab49a00aded3d49dfd2947390d69e\",\"urls\":[\"bzz-raw://d40b8f1e064fb96efadbfa2abd45344ddfd381dfbdc4d2b7d8db290b46edc153\",\"dweb:/ipfs/QmX4PJk4yWGSVBZYwU67igwVrADipTGPjfBGZ7UXWoUw7r\"]},\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/ReentrancyGuard.sol\":{\"keccak256\":\"0x433e3d9dbfa60a2419d308708700eef8c72dadc07e8394ec3c9b777d2586fb3f\",\"urls\":[\"bzz-raw://489f6aa435d170563377aac7ab003c0b711ef84cafc1c2901e410f8ad8b13b82\",\"dweb:/ipfs/QmYWt7cNbjF8uqypa9WYukSBKidJyj36cYjZdhTfBdkxcc\"]},\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/SafeERC20.sol\":{\"keccak256\":\"0x3b870b196eac5ae5254f07a8b154c74d06851b533fed94957e95ce52c75f7363\",\"urls\":[\"bzz-raw://8c80ba19a93b14d4cc74e50c5d628fefdd20d94dea11e9008e876c2f0705d907\",\"dweb:/ipfs/QmUJ2FJ5GmZ1cPDy7etAJhs7kJQr8quRC222Fufu9f3uz8\"]},\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/SafeMath.sol\":{\"keccak256\":\"0xce55eafd67f40d321975fe60c31755e70350cc7bcc01000542feb1cdc9dc11b4\",\"urls\":[\"bzz-raw://7079b687f9c4f0def1edcb0407f7e5957aaf7dc66f3065fc1f974ae61241b4e0\",\"dweb:/ipfs/QmRB7PyZD9TKFW5JZKYHuDLwPN9DVzxGi2pXyv9D4e1r4A\"]},\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/StakingTokenWrapper.sol\":{\"keccak256\":\"0x47da8b5ffc419c49d087167c9ab8a662fb2adfec1ba4ec37ff23162afa45d93e\",\"urls\":[\"bzz-raw://09472b9c736fcaeba1d61453778d5fa1f27cc5a8fafc68993da326bc562122b4\",\"dweb:/ipfs/QmNi93Aom3XYwHXHSLygbn6K4yrsiq897wrerUU6vFT3Nh\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.0;\r\nimport './ReentrancyGuard.sol';\r\nimport './SafeMath.sol';\r\nimport './SafeERC20.sol';\r\nimport './IERC20.sol';\r\n\r\ncontract StakingTokenWrapper is ReentrancyGuard {\r\n\r\n    using SafeMath for uint256;\r\n    using SafeERC20 for IERC20;\r\n\r\n    IERC20 public stakingToken;\r\n   \r\n    \r\n    \r\n    uint256 internal _totalSupply;\r\n    mapping(address => uint256) private _balances;\r\n\r\n    constructor(address _stakingToken ) internal {\r\n        stakingToken = IERC20(_stakingToken);\r\n       \r\n    }\r\n\r\n    function totalSupply()\r\n        public\r\n        view\r\n        returns (uint256)\r\n    {\r\n        return _totalSupply;\r\n    }\r\n\r\n    function balanceOf(address _account)\r\n        public\r\n        view\r\n        returns (uint256)\r\n    {\r\n        return _balances[_account];\r\n    }\r\n\r\n    function _stake(address _beneficiary, uint256 _amount)\r\n        internal\r\n        nonReentrant\r\n    {\r\n        _totalSupply = _totalSupply.add(_amount);\r\n        _balances[_beneficiary] = _balances[_beneficiary].add(_amount);\r\n        stakingToken.transferFrom(msg.sender, address(this), _amount);\r\n    }\r\n\r\n    function _withdraw(uint256 _amount)\r\n        internal\r\n        nonReentrant\r\n    {\r\n        _totalSupply = _totalSupply.sub(_amount);\r\n        _balances[msg.sender] = _balances[msg.sender].sub(_amount);\r\n         stakingToken.safeTransfer(msg.sender, _amount);\r\n    }\r\n}",
-  "sourcePath": "F:\\Programming\\Programming_Projects\\blockchain\\solidity\\normal_staking\\contracts\\StakingTokenWrapper.sol",
+  "sourcePath": "C:\\Users\\Lenovo\\Documents\\clients\\international client\\normal staking\\normal_staking\\contracts\\StakingTokenWrapper.sol",
   "ast": {
-    "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/StakingTokenWrapper.sol",
+    "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/StakingTokenWrapper.sol",
     "exportedSymbols": {
       "StakingTokenWrapper": [
         2355
@@ -94,7 +94,7 @@
         "src": "0:23:13"
       },
       {
-        "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/ReentrancyGuard.sol",
+        "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/ReentrancyGuard.sol",
         "file": "./ReentrancyGuard.sol",
         "id": 2228,
         "nodeType": "ImportDirective",
@@ -105,7 +105,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/SafeMath.sol",
+        "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/SafeMath.sol",
         "file": "./SafeMath.sol",
         "id": 2229,
         "nodeType": "ImportDirective",
@@ -116,7 +116,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/SafeERC20.sol",
+        "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/SafeERC20.sol",
         "file": "./SafeERC20.sol",
         "id": 2230,
         "nodeType": "ImportDirective",
@@ -127,7 +127,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol",
+        "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IERC20.sol",
         "file": "./IERC20.sol",
         "id": 2231,
         "nodeType": "ImportDirective",
@@ -1672,7 +1672,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/StakingTokenWrapper.sol",
+      "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/StakingTokenWrapper.sol",
       "exportedSymbols": {
         "StakingTokenWrapper": [
           2355
@@ -1696,7 +1696,7 @@
       {
         "attributes": {
           "SourceUnit": 971,
-          "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/ReentrancyGuard.sol",
+          "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/ReentrancyGuard.sol",
           "file": "./ReentrancyGuard.sol",
           "scope": 2356,
           "symbolAliases": [
@@ -1711,7 +1711,7 @@
       {
         "attributes": {
           "SourceUnit": 1642,
-          "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/SafeMath.sol",
+          "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/SafeMath.sol",
           "file": "./SafeMath.sol",
           "scope": 2356,
           "symbolAliases": [
@@ -1726,7 +1726,7 @@
       {
         "attributes": {
           "SourceUnit": 1553,
-          "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/SafeERC20.sol",
+          "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/SafeERC20.sol",
           "file": "./SafeERC20.sol",
           "scope": 2356,
           "symbolAliases": [
@@ -1741,7 +1741,7 @@
       {
         "attributes": {
           "SourceUnit": 213,
-          "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/IERC20.sol",
+          "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/IERC20.sol",
           "file": "./IERC20.sol",
           "scope": 2356,
           "symbolAliases": [
@@ -3440,7 +3440,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-02-24T07:14:15.316Z",
+  "updatedAt": "2021-02-24T07:47:16.459Z",
   "devdoc": {
     "methods": {}
   },

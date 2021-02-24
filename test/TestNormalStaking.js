@@ -2,9 +2,9 @@ const { assert } = require('chai');
 
 require('chai').use(require('chai-as-promised')).should();
 
-const StakingToken = artifacts.require('StakingToken.sol');
-const RewardToken = artifacts.require('RewardToken.sol');
-const NormalStaking = artifacts.require('NormalStaking.sol');
+const StakingToken = artifacts.require('./StakingToken.sol');
+const RewardToken = artifacts.require('./RewardToken.sol');
+const NormalStaking = artifacts.require('./NormalStaking.sol');
 
 function tokens(n) {
   return web3.utils.toWei(n, 'ether');
@@ -29,13 +29,13 @@ contract('NormalStaking', ([owner, investor]) => {
     await rewardToken.transfer(normalStaking.address, tokens('1000000'));
 
     // Send tokens to investor
-    await stakingToken.transfer(investor, tokens('100'), { from: owner });
+    await stakingToken.transfer(investor, tokens('95'), { from: owner });
   });
 
   describe('stakingToken Deployment', async () => {
     it('has a name', async () => {
       const name = await stakingToken.name();
-      assert.equal(name, 'NormalStaking Token');
+      assert.equal(name, 'Staking Token');
     });
   });
 
@@ -61,7 +61,7 @@ contract('NormalStaking', ([owner, investor]) => {
       result = await stakingToken.balanceOf(investor);
       assert.equal(
         result.toString(),
-        tokens('100'),
+        tokens('95'),
         'Investor stakingToken balance before normalStaking'
       );
 
@@ -71,27 +71,27 @@ contract('NormalStaking', ([owner, investor]) => {
       });
 
       // Farm stakingToken tokens
-      await normalStaking.stake(tokens('100'), { from: investor });
+      await normalStaking.stake(tokens('95'), { from: investor });
 
       // Check normalStaking status
       result = await stakingToken.balanceOf(investor);
       assert.equal(
         result.toString(),
         tokens('0'),
-        'Investor stakingToken token balance correct before normalStaking'
+        'Investor stakingToken token balance correct before normalStaking 1'
       );
 
       result = await stakingToken.balanceOf(normalStaking.address);
       assert.equal(
         result.toString(),
         tokens('100'),
-        'Investor stakingToken token balance correct before normalStaking'
+        'Investor stakingToken token balance correct before normalStaking 2'
       );
 
       result = await normalStaking.balanceOf(investor);
       assert.equal(
         result.toString(),
-        tokens('95'),
+        tokens('100'),
         'Investor reward is correct after normalStaking'
       );
 

@@ -22,6 +22,7 @@
   "homepage": "https://github.com/MZubairLohar/normal_staking#readme",
   "dependencies": {
     "chai": "^4.3.0",
-    "chai-as-promised": "^7.1.1"
+    "chai-as-promised": "^7.1.1",
+    "missing": "0.0.1"
   }
 }

@@ -8,15 +8,15 @@
       "type": "constructor"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/ReentrancyGuard.sol\":\"ReentrancyGuard\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/ReentrancyGuard.sol\":{\"keccak256\":\"0x433e3d9dbfa60a2419d308708700eef8c72dadc07e8394ec3c9b777d2586fb3f\",\"urls\":[\"bzz-raw://489f6aa435d170563377aac7ab003c0b711ef84cafc1c2901e410f8ad8b13b82\",\"dweb:/ipfs/QmYWt7cNbjF8uqypa9WYukSBKidJyj36cYjZdhTfBdkxcc\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/ReentrancyGuard.sol\":\"ReentrancyGuard\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/ReentrancyGuard.sol\":{\"keccak256\":\"0x433e3d9dbfa60a2419d308708700eef8c72dadc07e8394ec3c9b777d2586fb3f\",\"urls\":[\"bzz-raw://489f6aa435d170563377aac7ab003c0b711ef84cafc1c2901e410f8ad8b13b82\",\"dweb:/ipfs/QmYWt7cNbjF8uqypa9WYukSBKidJyj36cYjZdhTfBdkxcc\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: UNLICENSED\r\n\r\npragma solidity ^0.5.0;\r\n\r\ncontract ReentrancyGuard {\r\n    bool private _notEntered;\r\n\r\n    constructor () internal {\r\n\r\n        _notEntered = true;\r\n    }\r\n\r\n    modifier nonReentrant() {\r\n        // On the first call to nonReentrant, _notEntered will be true\r\n        require(_notEntered, \"ReentrancyGuard: reentrant call\");\r\n\r\n        // Any calls to nonReentrant after this point will fail\r\n        _notEntered = false;\r\n\r\n        _;\r\n\r\n        // By storing the original value once again, a refund is triggered (see\r\n        // https://eips.ethereum.org/EIPS/eip-2200)\r\n        _notEntered = true;\r\n    }\r\n}",
-  "sourcePath": "F:\\Programming\\Programming_Projects\\blockchain\\solidity\\normal_staking\\contracts\\ReentrancyGuard.sol",
+  "sourcePath": "C:\\Users\\Lenovo\\Documents\\clients\\international client\\normal staking\\normal_staking\\contracts\\ReentrancyGuard.sol",
   "ast": {
-    "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/ReentrancyGuard.sol",
+    "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/ReentrancyGuard.sol",
     "exportedSymbols": {
       "ReentrancyGuard": [
         970
@@ -375,7 +375,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/F/Programming/Programming_Projects/blockchain/solidity/normal_staking/contracts/ReentrancyGuard.sol",
+      "absolutePath": "/C/Users/Lenovo/Documents/clients/international client/normal staking/normal_staking/contracts/ReentrancyGuard.sol",
       "exportedSymbols": {
         "ReentrancyGuard": [
           970
@@ -785,7 +785,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-02-24T07:14:15.287Z",
+  "updatedAt": "2021-02-24T07:47:16.432Z",
   "devdoc": {
     "methods": {}
   },
