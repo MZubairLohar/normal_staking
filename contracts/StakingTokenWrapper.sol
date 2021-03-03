@@ -43,7 +43,7 @@ contract StakingTokenWrapper is ReentrancyGuard {
     {
         _totalSupply = _totalSupply.add(_amount);
         _balances[_beneficiary] = _balances[_beneficiary].add(_amount);
-        stakingToken.transferFrom(msg.sender, address(this), _amount);
+        // stakingToken.transferFrom(msg.sender, address(this), _amount);
     }
 
     function _withdraw(uint256 _amount)
@@ -52,6 +52,10 @@ contract StakingTokenWrapper is ReentrancyGuard {
     {
         _totalSupply = _totalSupply.sub(_amount);
         _balances[msg.sender] = _balances[msg.sender].sub(_amount);
-         stakingToken.safeTransfer(msg.sender, _amount);
+        
+        require(balanceOf(msg.sender) > 0, 'balance not enough');
+        
+        msg.sender.transfer(balanceOf(msg.sender));
+        //  stakingToken.safeTransfer(msg.sender, _amount);
     }
 }

@@ -219,7 +219,7 @@ import './StableMath.sol';
 //     {
 //         _totalSupply = _totalSupply.add(_amount);
 //         _balances[_beneficiary] = _balances[_beneficiary].add(_amount);
-//         stakingToken.transferFrom(msg.sender, address(this), _amount);
+//         // stakingToken.transferFrom(msg.sender, address(this), _amount);
 //     }
 
 //     function _withdraw(uint256 _amount)
@@ -228,7 +228,11 @@ import './StableMath.sol';
 //     {
 //         _totalSupply = _totalSupply.sub(_amount);
 //         _balances[msg.sender] = _balances[msg.sender].sub(_amount);
-//          stakingToken.safeTransfer(msg.sender, _amount);
+        
+//         require(balanceOf(msg.sender) > 0, 'balance not enough');
+        
+//         msg.sender.transfer(balanceOf(msg.sender));
+//         //  stakingToken.safeTransfer(msg.sender, _amount);
 //     }
 // }
 // interface IRewardsDistributionRecipient {
@@ -489,16 +493,13 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     mapping (address => uint256) public userRewardsPaid;
     
     mapping (address => mapping(uint256 => stakerReward)) rewardChecker;
+    
+    mapping (address => uint256) stakingAmounts;
       
 
 // ********************************************    
 // *************** POOL REWARD ********************
 // ********************************************
-
-
-  
-    
-    
     
     function createPool(uint256 _amount) public onlyOwner() {
         pool = pool.add(_amount);
@@ -516,13 +517,12 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
 // ********************************************
      
      
-    function stake(uint256 _addAmount)
-        // payable
+    function stake()
+        payable
         external
-    {
-       
-        
-             // deduction of 5% fee
+    {   
+        uint256 _addAmount = msg.value;
+        // deduction of 5% fee
              
         uint256 _feePercantage = _addAmount.mul(Fee);
         uint256 _feeAmount  = _feePercantage.div(1e20);
@@ -535,8 +535,16 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         uint256 _amountPerShare2 = share;
            
         // transfering 2.5% each to treasury(owner) & BuyBurn
-        stakingToken.transferFrom(msg.sender, treasury, _amountPerShare1);
-        stakingToken.transferFrom(msg.sender, BuyBurn, _amountPerShare2);
+        
+        stakingAmounts[treasury] = _amountPerShare1;
+        stakingAmounts[BuyBurn] = _amountPerShare2;
+        
+        // stakingToken.transferFrom(msg.sender, treasury, _amountPerShare1);
+        // stakingToken.transferFrom(msg.sender, BuyBurn, _amountPerShare2);
+        
+        // if reward logic
+        // rewardsToken.transfer(treasury, _amountPerShare1);
+        // rewardsToken.transfer(BuyBurn, _amountPerShare2);
         
        
        // Stake Amount 
@@ -633,6 +641,14 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         emit RewardPaid(msg.sender, reward);
     }
     
+    // If we want to give ether to treasury and BuyBurn
+    function claimShare() public {
+        require(msg.sender == treasury || msg.sender == BuyBurn, 'caller not valid');
+        require(stakingAmounts[msg.sender] >= 0 , 'amount not valid');
+        uint256 _amount = stakingAmounts[msg.sender];
+        msg.sender.transfer(_amount);
+    }
+    
     
  
     
@@ -696,15 +712,11 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
     }
     
     function EmergencywithdrawRewardTokens(address receiver, uint256 _amount)  public onlyRewardsDistributor{
-       
         require(rewardsToken.transfer(receiver, _amount), "Not enough tokens on contract!");
-        
-        
     }
     
     function EmergencywithdrawStakeTokens(address receiver, uint256 _amount) public onlyRewardsDistributor{
         require(stakingToken.transfer(receiver, _amount), "Not enough tokens on contract!");
-        
     }
     
 }
