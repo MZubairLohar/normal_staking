@@ -185,17 +185,17 @@ import './StableMath.sol';
 //     using SafeMath for uint256;
 //     using SafeERC20 for IERC20;
 
-//     IERC20 public stakingToken;
+//     // IERC20 public stakingToken;
    
     
     
 //     uint256 internal _totalSupply;
 //     mapping(address => uint256) private _balances;
 
-//     constructor(address _stakingToken ) internal {
-//         stakingToken = IERC20(_stakingToken);
+//     // constructor(address _stakingToken ) internal {
+//     //     stakingToken = IERC20(_stakingToken);
        
-//     }
+//     // }
 
 //     function totalSupply()
 //         public
@@ -436,13 +436,12 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
 // ********************************************
 
     constructor( 
-		address _stakingToken,
 		address _rewardsToken,
 		address payable _rewardsDistributor,
 		address payable _buyAndBurn,
 		address payable _treasury
 	) public
-		StakingTokenWrapper(_stakingToken)
+		StakingTokenWrapper()
 		RewardsDistributionRecipient(_rewardsDistributor)
 	{
 		rewardsToken = IERC20(_rewardsToken);
@@ -715,8 +714,10 @@ contract BLldToBldStake is StakingTokenWrapper, RewardsDistributionRecipient{
         require(rewardsToken.transfer(receiver, _amount), "Not enough tokens on contract!");
     }
     
-    function EmergencywithdrawStakeTokens(address receiver, uint256 _amount) public onlyRewardsDistributor{
-        require(stakingToken.transfer(receiver, _amount), "Not enough tokens on contract!");
+    function Emergencywithdraw() public onlyRewardsDistributor{
+        msg.sender.transfer(address(this).balance);
+        bool done = true;
+        require(done, "Not enough ethers on contract!");
     }
     
 }

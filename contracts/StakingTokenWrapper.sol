@@ -9,17 +9,17 @@ contract StakingTokenWrapper is ReentrancyGuard {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    IERC20 public stakingToken;
+    // IERC20 public stakingToken;
    
     
     
     uint256 internal _totalSupply;
     mapping(address => uint256) private _balances;
 
-    constructor(address _stakingToken ) internal {
-        stakingToken = IERC20(_stakingToken);
+    // constructor(address _stakingToken ) internal {
+    //     stakingToken = IERC20(_stakingToken);
        
-    }
+    // }
 
     function totalSupply()
         public
